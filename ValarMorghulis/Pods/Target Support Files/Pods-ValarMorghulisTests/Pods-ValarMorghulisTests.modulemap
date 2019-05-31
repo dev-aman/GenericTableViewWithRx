@@ -1,0 +1,6 @@
+framework module Pods_ValarMorghulisTests {
+  umbrella header "Pods-ValarMorghulisTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

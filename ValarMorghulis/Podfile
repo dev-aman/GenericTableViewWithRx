@@ -1,0 +1,13 @@
+
+target 'ValarMorghulis' do
+  use_frameworks!
+
+  pod 'RxCocoa'
+  pod 'RxSwift'
+  pod 'RxDataSources'
+
+  target 'ValarMorghulisTests' do
+    inherit! :search_paths
+  end
+
+end
