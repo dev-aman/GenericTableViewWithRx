@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import RxSwift
 
 class MaleTableViewCell: BaseTableViewCell {
 
+    let disposeBag: DisposeBag = DisposeBag()
+    
     // MARK:- IBOutlets
-    @IBOutlet weak var displayPictureImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet private weak var displayPictureImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var statusLabel: UILabel!
+    @IBOutlet private weak var openDetails: UIButton!
     
     // MARK:- overrides
     
@@ -30,14 +34,18 @@ class MaleTableViewCell: BaseTableViewCell {
             return
         }
         self.refreshUI(withRowViewModel: rowModel)
+        self.openDetails.rx.tap.asDriver().drive(onNext: { [rowModel] () in
+            print("Rx tap on cell next")
+            rowModel.openDetails.accept(rowModel)
+        }).disposed(by: disposeBag)
     }
-    
+        
     // MARK:- Refresh UI methods
     
     private func refreshUI(withRowViewModel viewModel: MaleRowViewModel) {
-        self.nameLabel.text = viewModel.name
-        self.statusLabel.text = viewModel.status
-        if let imageName = viewModel.image {
+        self.nameLabel.text = viewModel.personModel?.name
+        self.statusLabel.text = viewModel.personModel?.status
+        if let imageName = viewModel.personModel?.image {
             self.displayPictureImageView.image = UIImage(named: imageName)
         }
     }

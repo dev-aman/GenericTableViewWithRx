@@ -13,17 +13,9 @@ internal struct FemaleRowViewModel: RowViewModelProtocol {
     var cellIdentifier: String {
         return String(describing: FemaleTableViewCell.self)
     }
-    var name: String?
-    var status: String?
-    var image: String?
-    var gender: String?
-    
+    var personModel: PersonModel?
+
     init(name: String?, alive: Bool?, image: String?, gender: Gender?) {
-        self.name = name
-        if let alive = alive {
-            self.status = alive ? "Alive" : "Dead"
-        }
-        self.image = image
-        self.gender = gender?.rawValue
+        self.personModel = PersonModel(name: name, alive: alive, image: image, gender: gender)
     }
 }

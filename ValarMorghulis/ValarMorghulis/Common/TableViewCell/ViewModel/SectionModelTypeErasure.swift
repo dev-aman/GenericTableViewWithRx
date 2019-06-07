@@ -9,6 +9,8 @@
 import Foundation
 import RxDataSources
 
+// Abstract base for Type Erasure
+// Can't be used directly.
 private class _AnySectionModelTypeBase<Item>: SectionModelType {
     var items: [Item]
     
@@ -24,7 +26,8 @@ private class _AnySectionModelTypeBase<Item>: SectionModelType {
     }
 }
 
-
+// private Box for Abstract base
+// Will be used as a oncrete for Abstract base.
 private final class _AnySectionModelTypeBox<Concrete: SectionModelType>: _AnySectionModelTypeBase<Concrete.Item> {
 
     var concrete: Concrete?
@@ -39,7 +42,9 @@ private final class _AnySectionModelTypeBox<Concrete: SectionModelType>: _AnySec
     }
 }
 
-final class GenericSectionModelType<Item>: SectionModelType {
+// public wrapper for Type Erasure.
+// Conforms SectionModelType protocol
+internal final class GenericSectionModelType<Item>: SectionModelType {
 
     var items: [Item] {
         return box.items

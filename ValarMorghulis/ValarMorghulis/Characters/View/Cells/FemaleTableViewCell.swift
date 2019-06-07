@@ -11,9 +11,9 @@ import UIKit
 class FemaleTableViewCell: BaseTableViewCell {
     
     // MARK:- IBOutlets
-    @IBOutlet weak var displayPictureImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet private weak var displayPictureImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var statusLabel: UILabel!
 
     // MARK:- overrides
     
@@ -35,9 +35,9 @@ class FemaleTableViewCell: BaseTableViewCell {
     // MARK:- Refresh UI methods
     
     private func refreshUI(withRowViewModel viewModel: FemaleRowViewModel) {
-        self.nameLabel.text = viewModel.name
-        self.statusLabel.text = viewModel.status
-        if let imageName = viewModel.image {
+        self.nameLabel.text = viewModel.personModel?.name
+        self.statusLabel.text = viewModel.personModel?.status
+        if let imageName = viewModel.personModel?.image {
             self.displayPictureImageView.image = UIImage(named: imageName)
         }
     }

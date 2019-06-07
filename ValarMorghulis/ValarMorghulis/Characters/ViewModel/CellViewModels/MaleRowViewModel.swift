@@ -7,22 +7,23 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 internal struct MaleRowViewModel: RowViewModelProtocol {
+   
     var cellIdentifier: String {
         return String(describing: MaleTableViewCell.self)
     }
-    var name: String?
-    var status: String?
-    var image: String?
-    var gender: String?
+    var personModel: PersonModel?
+    let disposeBag: DisposeBag = DisposeBag()
     
-    init(name: String?, alive: Bool?, image: String?, gender: Gender?) {
-        self.name = name
-        if let alive = alive {
-            self.status = alive ? "Alive" : "Dead"
-        }
-        self.image = image
-        self.gender = gender?.rawValue
+    internal var openDetails: PublishRelay<MaleRowViewModel>
+    
+    init(name: String?, alive: Bool?, image: String?, gender: Gender?, openDetails: PublishRelay<MaleRowViewModel>) {
+        
+        self.personModel = PersonModel(name: name, alive: alive, image: image, gender: gender)
+        self.openDetails = openDetails
     }
+
 }

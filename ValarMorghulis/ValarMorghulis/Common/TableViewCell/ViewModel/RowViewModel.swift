@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol RowViewModelProtocol {
+internal protocol RowViewModelProtocol {
     var cellIdentifier: String { get }
 }

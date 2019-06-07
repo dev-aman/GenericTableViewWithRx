@@ -9,7 +9,7 @@
 import Foundation
 import RxDataSources
 
-struct SectionViewModel {
+internal struct SectionViewModel {
     
     var header: Codable?
     var items: [Item]

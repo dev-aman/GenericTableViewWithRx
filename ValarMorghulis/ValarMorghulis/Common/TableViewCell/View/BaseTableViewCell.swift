@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewCell: UITableViewCell {
+internal class BaseTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,7 +18,7 @@ class BaseTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func bindUI(withRowViewModel viewModel: RowViewModelProtocol) {
+    internal func bindUI(withRowViewModel viewModel: RowViewModelProtocol) {
         
     }
 }

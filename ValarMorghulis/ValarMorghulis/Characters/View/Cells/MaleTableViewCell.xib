@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Jon Snow" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E9-gm-JJI">
-                                <rect key="frame" x="160.5" y="24" width="127.5" height="21"/>
+                                <rect key="frame" x="160.5" y="24" width="75.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Dead" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXh-hN-DOd">
-                                <rect key="frame" x="166.5" y="51.5" width="121.5" height="21"/>
+                                <rect key="frame" x="166.5" y="51.5" width="69.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -60,6 +60,15 @@
                                     <constraint firstAttribute="height" constant="1" id="Qpk-z8-3Ke"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnQ-r4-grD">
+                                <rect key="frame" x="248" y="25.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="n7t-uh-F3I"/>
+                                    <constraint firstAttribute="height" constant="40" id="qFR-SF-UCr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="Details"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -68,6 +77,7 @@
                             <constraint firstItem="qXh-hN-DOd" firstAttribute="leading" secondItem="53s-r4-j6f" secondAttribute="trailing" constant="6" id="G5b-E7-6ep"/>
                             <constraint firstItem="53s-r4-j6f" firstAttribute="top" secondItem="7E9-gm-JJI" secondAttribute="bottom" constant="6.5" id="G9E-ms-Vix"/>
                             <constraint firstItem="qXh-hN-DOd" firstAttribute="trailing" secondItem="7E9-gm-JJI" secondAttribute="trailing" id="HeV-bg-A7J"/>
+                            <constraint firstAttribute="trailing" secondItem="jnQ-r4-grD" secondAttribute="trailing" constant="32" id="Jde-y3-bIs"/>
                             <constraint firstItem="qXh-hN-DOd" firstAttribute="bottom" secondItem="53s-r4-j6f" secondAttribute="bottom" id="MPg-Jy-uk9"/>
                             <constraint firstAttribute="bottom" secondItem="FV8-jH-4zn" secondAttribute="bottom" id="R17-hM-xZF"/>
                             <constraint firstItem="7E9-gm-JJI" firstAttribute="top" secondItem="y92-0R-3uq" secondAttribute="top" id="RhO-9c-KsI"/>
@@ -75,12 +85,13 @@
                             <constraint firstItem="y92-0R-3uq" firstAttribute="top" secondItem="5aG-6B-ydu" secondAttribute="top" id="TBb-2r-NTK"/>
                             <constraint firstItem="53s-r4-j6f" firstAttribute="leading" secondItem="y92-0R-3uq" secondAttribute="leading" id="Y0l-yA-3SN"/>
                             <constraint firstAttribute="trailing" secondItem="FV8-jH-4zn" secondAttribute="trailing" id="aVu-BS-fak"/>
+                            <constraint firstItem="jnQ-r4-grD" firstAttribute="centerY" secondItem="0Ig-Mz-VAR" secondAttribute="centerY" id="c1m-wd-HG7"/>
                             <constraint firstItem="7E9-gm-JJI" firstAttribute="leading" secondItem="y92-0R-3uq" secondAttribute="trailing" constant="6" id="gG9-lB-lR2"/>
                             <constraint firstItem="7E9-gm-JJI" firstAttribute="bottom" secondItem="y92-0R-3uq" secondAttribute="bottom" id="pFk-gN-lw4"/>
                             <constraint firstItem="qXh-hN-DOd" firstAttribute="top" secondItem="53s-r4-j6f" secondAttribute="top" id="pH2-aF-Yfc"/>
                             <constraint firstItem="5aG-6B-ydu" firstAttribute="leading" secondItem="0Ig-Mz-VAR" secondAttribute="leading" constant="32" id="rCH-ll-LhX"/>
+                            <constraint firstItem="jnQ-r4-grD" firstAttribute="leading" secondItem="7E9-gm-JJI" secondAttribute="trailing" constant="12" id="ver-jB-gmw"/>
                             <constraint firstItem="5aG-6B-ydu" firstAttribute="top" secondItem="0Ig-Mz-VAR" secondAttribute="top" constant="24" id="whw-bc-JBw"/>
-                            <constraint firstAttribute="trailing" secondItem="7E9-gm-JJI" secondAttribute="trailing" constant="32" id="yZv-na-8X9"/>
                             <constraint firstAttribute="bottom" secondItem="qXh-hN-DOd" secondAttribute="bottom" constant="18" id="zYY-7Q-X4d"/>
                         </constraints>
                     </view>
@@ -96,9 +107,10 @@
             <connections>
                 <outlet property="displayPictureImageView" destination="5aG-6B-ydu" id="LfP-Xq-Pm6"/>
                 <outlet property="nameLabel" destination="7E9-gm-JJI" id="4ED-6Z-dYg"/>
+                <outlet property="openDetails" destination="jnQ-r4-grD" id="Via-cf-Ow3"/>
                 <outlet property="statusLabel" destination="qXh-hN-DOd" id="h08-ZK-w1b"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="142.29910714285714"/>
+            <point key="canvasLocation" x="-101" y="89"/>
         </tableViewCell>
     </objects>
 </document>

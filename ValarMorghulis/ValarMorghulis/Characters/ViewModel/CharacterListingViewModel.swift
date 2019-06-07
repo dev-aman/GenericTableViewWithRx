@@ -17,28 +17,46 @@ struct CharacterListingViewModel: ViewModelType {
     
     internal struct Input {
         public let getCharacters: Driver<Void>
+        public let selectedPerson: Driver<IndexPath>
     }
     
     internal struct Output {
         internal let characters: Driver<[GenericSectionModelType<RowViewModelProtocol>]>
+        internal let openDetails: Driver<MaleRowViewModel>
+        internal let openFemaleDetails: Driver<FemaleRowViewModel>
     }
     
     func transform(input: Input) -> Output {
         
-        let res: Driver<[GenericSectionModelType<RowViewModelProtocol>]> = input.getCharacters.flatMapLatest { [useCase] () -> Driver<[CharacterResponseModel]> in
+        let openDetails = PublishRelay<MaleRowViewModel>.init()
+        let openDetailsDriver: Driver<MaleRowViewModel> = openDetails.asDriver(onErrorDriveWith: Driver<MaleRowViewModel>.empty())
+
+        let characterDriver: Driver<[GenericSectionModelType<RowViewModelProtocol>]> = input.getCharacters.flatMapLatest { [useCase] () -> Driver<[CharacterResponseModel]> in
                 return useCase.getCharacters().asDriver(onErrorJustReturn: [])
             }.map { (characters) -> [GenericSectionModelType<RowViewModelProtocol>] in
-                return self.processCharaterResponse(characters: characters)
+                return self.processCharaterResponse(characters: characters, openDetailsPublishRelay: openDetails)
             }
-        return Output(characters: res)
+
+        let openFemaleDetailsDriver: Driver<FemaleRowViewModel> = input.selectedPerson.flatMap { [characterDriver] (indexPath) -> Driver<FemaleRowViewModel> in
+            return characterDriver.map({ (sections) -> RowViewModelProtocol in
+                return sections[indexPath.section].items[indexPath.row]
+            }).filter({ (rowViewModel) -> Bool in
+                guard let _ = rowViewModel as? FemaleRowViewModel else { return false }
+                return true
+            }).map({ (viewModel) -> FemaleRowViewModel in
+                return viewModel as! FemaleRowViewModel
+            })
+        }
+        
+        return Output(characters: characterDriver, openDetails: openDetailsDriver, openFemaleDetails: openFemaleDetailsDriver)
     }
     
-    private func processCharaterResponse(characters: [CharacterResponseModel]) -> [GenericSectionModelType<RowViewModelProtocol>] {
+    private func processCharaterResponse(characters: [CharacterResponseModel], openDetailsPublishRelay: PublishRelay<MaleRowViewModel>) -> [GenericSectionModelType<RowViewModelProtocol>] {
         let items = characters.map { (character) -> RowViewModelProtocol in
             guard character.gender == Gender.Male else {
                 return FemaleRowViewModel(name: character.name, alive: character.alive, image: character.image, gender: character.gender)
             }
-            return MaleRowViewModel(name: character.name, alive: character.alive, image: character.image, gender: character.gender)
+            return MaleRowViewModel(name: character.name, alive: character.alive, image: character.image, gender: character.gender, openDetails: openDetailsPublishRelay)
         }
         return [GenericSectionModelType<RowViewModelProtocol>(SectionViewModel(header: "", items: items))]
     }
