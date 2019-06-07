@@ -11,9 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+/// This view model ius responsible to construct the CharacterListingView.
 struct CharacterListingViewModel: ViewModelType {
     
+    // MARK:- Internal properties
+    
     private let useCase = CharactersUseCase()
+    
+    // MARK:- ViewModelType methods and structs.
     
     internal struct Input {
         public let getCharacters: Driver<Void>
@@ -51,6 +57,15 @@ struct CharacterListingViewModel: ViewModelType {
         return Output(characters: characterDriver, openDetails: openDetailsDriver, openFemaleDetails: openFemaleDetailsDriver)
     }
     
+    
+    /// This method is used to process the Characters received from the use case
+    /// and generate the section model array
+    /// to construct datasource for the table view
+    ///
+    /// - Parameters:
+    ///   - characters: [CharacterResponseModel], characters received from the use case
+    ///   - openDetailsPublishRelay: PublishRelay<MaleRowViewModel>, this observer will be assigned to MaleRowViewModel to get the events from Cell to View controllers view model.
+    /// - Returns: [GenericSectionModelType<RowViewModelProtocol>]
     private func processCharaterResponse(characters: [CharacterResponseModel], openDetailsPublishRelay: PublishRelay<MaleRowViewModel>) -> [GenericSectionModelType<RowViewModelProtocol>] {
         let items = characters.map { (character) -> RowViewModelProtocol in
             guard character.gender == Gender.Male else {

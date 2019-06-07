@@ -8,9 +8,12 @@
 
 import UIKit
 
+
+/// This view is used as the view for Female cell.
 class FemaleTableViewCell: BaseTableViewCell {
     
     // MARK:- IBOutlets
+    
     @IBOutlet private weak var displayPictureImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var statusLabel: UILabel!
@@ -31,8 +34,11 @@ class FemaleTableViewCell: BaseTableViewCell {
         }
         self.refreshUI(withRowViewModel: rowModel)
     }
-    
-    // MARK:- Refresh UI methods
+}
+
+
+// MARK:- Refresh UI methods
+extension FemaleTableViewCell {
     
     private func refreshUI(withRowViewModel viewModel: FemaleRowViewModel) {
         self.nameLabel.text = viewModel.personModel?.name

@@ -11,9 +11,23 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+/// This view model will be used to construct view for CharacterDetailsView.
 struct CharacterDetailsViewModel: ViewModelType {
     
+    // MARK:- Internal properties.
+    
     private var person: PersonModel?
+    
+    
+    // MARK:- initializers
+    
+    init(person: PersonModel?) {
+        self.person = person
+    }
+    
+    
+    // MARK:- ViewModelType methods and structs.
 
     internal struct Input {
         internal let loadView: Driver<Void>
@@ -21,10 +35,6 @@ struct CharacterDetailsViewModel: ViewModelType {
     
     internal struct Output {
         internal let data: Driver<PersonModel?>
-    }
-    
-    init(person: PersonModel?) {
-        self.person = person
     }
     
     func transform(input: Input) -> Output {

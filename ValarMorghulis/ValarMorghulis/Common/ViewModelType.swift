@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+/// ViewModelType is used as the base set of rules for ViewModels.
+/// inspiration from Tokopedia project.
 internal protocol ViewModelType {
     associatedtype Input
     associatedtype Output

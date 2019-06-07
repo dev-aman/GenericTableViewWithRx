@@ -8,11 +8,13 @@
 
 import Foundation
 
+// This enum is used to provide type for Gender for the characters.
 internal enum Gender: String, Codable {
     case Male
     case Female
 }
 
+/// This model is used as a response model for Characters.
 internal struct CharacterResponseModel: Codable {
     var name: String?
     var alive: Bool?

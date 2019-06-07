@@ -9,11 +9,16 @@
 import Foundation
 import RxSwift
 
+
+/// This protocol is used as a set of rules to create CharactersUseCase.
 protocol CharactersUseCaseProtocol {
     func getCharacters() -> Observable<[CharacterResponseModel]>
 }
 
+
+/// Characters use case contains business logic related Characters.
 class CharactersUseCase: CharactersUseCaseProtocol {
+    
     
     func getCharacters() -> Observable<[CharacterResponseModel]> {
         return PublishSubject<[CharacterResponseModel]>.just(getMockedCharacters())

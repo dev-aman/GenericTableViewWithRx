@@ -8,7 +8,10 @@
 
 import Foundation
 
+
+/// PersonModel used as a Character.
 internal struct PersonModel: Codable {
+    
     var name: String?
     var status: String?
     var alive: Bool?

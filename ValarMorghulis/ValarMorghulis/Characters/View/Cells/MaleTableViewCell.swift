@@ -9,11 +9,17 @@
 import UIKit
 import RxSwift
 
+
+/// This view is used as the view for Male cell.
 class MaleTableViewCell: BaseTableViewCell {
 
+    
+    // MARK:- Internal properties.
+    
     let disposeBag: DisposeBag = DisposeBag()
     
     // MARK:- IBOutlets
+    
     @IBOutlet private weak var displayPictureImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var statusLabel: UILabel!
@@ -35,12 +41,15 @@ class MaleTableViewCell: BaseTableViewCell {
         }
         self.refreshUI(withRowViewModel: rowModel)
         self.openDetails.rx.tap.asDriver().drive(onNext: { [rowModel] () in
-            print("Rx tap on cell next")
             rowModel.openDetails.accept(rowModel)
         }).disposed(by: disposeBag)
     }
-        
-    // MARK:- Refresh UI methods
+
+}
+
+
+// MARK:- Refresh UI methods
+extension MaleTableViewCell {
     
     private func refreshUI(withRowViewModel viewModel: MaleRowViewModel) {
         self.nameLabel.text = viewModel.personModel?.name

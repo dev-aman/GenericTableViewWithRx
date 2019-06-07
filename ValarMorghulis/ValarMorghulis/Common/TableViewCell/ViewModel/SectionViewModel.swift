@@ -9,12 +9,18 @@
 import Foundation
 import RxDataSources
 
+
+/// SectionViewModel is used as a generic Section view model
+/// where there is provision to assign header model to a Codable type
 internal struct SectionViewModel {
     
     var header: Codable?
     var items: [Item]
 }
 
+
+// MARK: - this mextension is used to conform to SectionModelType.
+/// SectionModelType belongs to RxDataSource
 extension SectionViewModel: SectionModelType {
     typealias Item = RowViewModelProtocol
     

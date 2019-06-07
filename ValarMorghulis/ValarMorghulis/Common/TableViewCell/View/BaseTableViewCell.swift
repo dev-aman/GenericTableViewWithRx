@@ -8,8 +8,11 @@
 
 import UIKit
 
+// BaseTableViewCell is used as the base class for all the cell that we are making generic.
 internal class BaseTableViewCell: UITableViewCell {
 
+    // MARK:- overrides
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -18,6 +21,9 @@ internal class BaseTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    /// Bind UI is used to bind view models of type `RowViewModelProtocol` with the generic cells.
+    ///
+    /// - Parameter viewModel: RowViewModelProtocol
     internal func bindUI(withRowViewModel viewModel: RowViewModelProtocol) {
         
     }

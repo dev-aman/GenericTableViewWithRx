@@ -11,14 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+
+/// This class is used to show the listing for the Characters.
 class CharacterListingViewController: UIViewController {
 
     // MARK:- Instance properties
     
     private let disposeBag = DisposeBag()
-    var viewModel = CharacterListingViewModel()
-    
-    var selectedPersonTrigger: PublishSubject<IndexPath>?
+    private var viewModel = CharacterListingViewModel()
+    private var selectedPersonTrigger: PublishSubject<IndexPath>?
         
     // MARK:- IBOutlets
     
@@ -32,15 +33,16 @@ class CharacterListingViewController: UIViewController {
         self.setupTableView()
         self.bindUI()
     }
-    
-    deinit {
-        print("CharacterListingViewController deinit")
-    }
 
 }
 
+
+// MARK: - bind UI methods.
+/// This extension is used to bind the CharacterListingViewController to the view model.
 extension CharacterListingViewController {
     
+    
+    /// bind ui to view model
     private func bindUI() {
         let dataSource = RxTableViewSectionedReloadDataSource<GenericSectionModelType<RowViewModelProtocol>>(configureCell: { (dataSource, tableView, indexPath, item) -> UITableViewCell in
             let cell = tableView.dequeueReusableCell(withIdentifier: item.cellIdentifier, for: indexPath) as! BaseTableViewCell
@@ -63,8 +65,15 @@ extension CharacterListingViewController {
     }
 }
 
+
+// MARK: - Router
+/// This extension is used to handle routing/navigation related methods
 extension CharacterListingViewController {
     
+    
+    /// This method is used to open CharacterDetailsViewController.
+    ///
+    /// - Parameter person: PersonModel, for which the details is to be shown
     private func openDetailsPage(forPerson person: PersonModel?) {
         let charaterViewController = CharacterDetailsViewController.init(nibName: String(describing: CharacterDetailsViewController.self), bundle: nil)
         let detailsViewModel = CharacterDetailsViewModel(person: person)
@@ -76,12 +85,16 @@ extension CharacterListingViewController {
 }
 
 
+// MARK: - Table view setup and delegates
+/// This extension is used to setup table view,
+/// and conform to the Delegate methods for table view
 extension CharacterListingViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedPersonTrigger?.onNext(indexPath)
     }
     
+    /// this is used to setup table view
     private func setupTableView() {
         self.tableView.rx.setDelegate(self).disposed(by: disposeBag)
         self.tableView.register(UINib(nibName: String(describing: MaleTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: MaleTableViewCell.self))

@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+/// RowViewModelProtocol is used as the base set of rules for all the generic cell view model.
 internal protocol RowViewModelProtocol {
     var cellIdentifier: String { get }
 }

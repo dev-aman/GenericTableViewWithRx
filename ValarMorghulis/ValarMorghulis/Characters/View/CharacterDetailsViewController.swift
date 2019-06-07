@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+/// This class is used to show the view for the Character details.
 class CharacterDetailsViewController: UIViewController {
     
     // MARK:- Instance properties
@@ -32,8 +34,13 @@ class CharacterDetailsViewController: UIViewController {
     
 }
 
+
+// MARK: - bind and refresh UI methods.
+/// This extension is used to bind and refresh the UI for the CharacterDetailsViewController
 extension CharacterDetailsViewController {
     
+    
+    /// bind ui to view model
     private func bindUI() {
         let output = self.viewModel?.transform(input: CharacterDetailsViewModel.Input(loadView: Driver<Void>.just(())))
         output?.data.drive(onNext: { [weak self] (person) in
@@ -41,6 +48,11 @@ extension CharacterDetailsViewController {
         }).disposed(by: disposeBag)
     }
     
+    
+    /// refreshUI is used to refresh ui
+    /// for the PersonModel
+    ///
+    /// - Parameter person: PersonModel type.
     private func refreshUI(withPersonModel person: PersonModel?) {
         if let imageName = person?.image {
             self.imageView.image = UIImage(named: imageName)
